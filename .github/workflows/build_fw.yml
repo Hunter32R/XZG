@@ -125,14 +125,3 @@ jobs:
           git add .
           git commit -m "Add firmware and manifest for version ${{ steps.get_tag.outputs.tag }}"
           git push origin releases
-
-      - name: Send Telegram Notification about release
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          format: markdown
-          message: |
-            ${{ env.commitMessage }}
-
-            [${{ steps.get_tag.outputs.tag }}](https://github.com/${{ github.repository }}/releases/tag/${{ steps.get_tag.outputs.tag }})
